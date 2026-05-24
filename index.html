@@ -1,188 +1,532 @@
-export default function PainelApolicesPOC() {
-  const now = new Date().toLocaleString("pt-BR");
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Inteligente de Apólices</title>
 
-  const indicadores = [
-    { titulo: "Apólices Vencidas", valor: 12 },
-    { titulo: "A Vencer", valor: 18 },
-    { titulo: "Sem PGR", valor: 4 },
-    { titulo: "Pendências", valor: 7 },
-  ];
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
 
-  const dadosApolice = [
-    ["Número Apólice", "5501000289"],
-    ["Seguradora", "SEGUROS SURA S/A"],
-    ["Corretora", "NOVA ASTEROIDE CORRETORA"],
-    ["Transportadora", "AGT LOG LOGISTICA E CARGAS LTDA"],
-    ["CNPJ", "00.853.538/0001-49"],
-    ["Vigência Inicial", "30/04/2025"],
-    ["Vigência Final", "30/04/2026"],
-    ["Status", "NO PRAZO"],
-    ["LMG", "R$ 2.000.000,00"],
-    ["Tipo Seguro", "RC-DC"],
-    ["Score Compliance", "92%"],
-    ["Status Operacional", "APTO"],
-  ];
+    body{
+      background:#f1f5f9;
+      color:#1e293b;
+    }
 
-  return (
-    <div className="min-h-screen bg-slate-100 flex flex-col">
-      {/* HEADER */}
-      <header className="bg-slate-900 text-white shadow-lg px-6 py-4 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-wide">
-            PAINEL INTELIGENTE DE APÓLICES
-          </h1>
-          <p className="text-sm text-slate-300">
-            Compliance e Gestão Operacional
-          </p>
+    /* HEADER */
+
+    header{
+      background:#0f172a;
+      color:white;
+      padding:20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .header-left h1{
+      font-size:28px;
+    }
+
+    .header-left p{
+      color:#cbd5e1;
+      margin-top:5px;
+    }
+
+    .header-center{
+      text-align:center;
+    }
+
+    .header-center p{
+      color:#cbd5e1;
+      font-size:14px;
+    }
+
+    .header-buttons{
+      display:flex;
+      gap:10px;
+    }
+
+    .header-buttons button{
+      background:#1d4ed8;
+      border:none;
+      color:white;
+      padding:10px 15px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .header-buttons button:hover{
+      background:#2563eb;
+    }
+
+    /* LAYOUT */
+
+    .container{
+      display:flex;
+      min-height:calc(100vh - 120px);
+    }
+
+    /* MENU */
+
+    aside{
+      width:240px;
+      background:#1e293b;
+      color:white;
+      padding:20px;
+    }
+
+    aside h2{
+      margin-bottom:20px;
+    }
+
+    aside button{
+      width:100%;
+      background:#334155;
+      border:none;
+      color:white;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:12px;
+      text-align:left;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    aside button:hover{
+      background:#2563eb;
+    }
+
+    /* MAIN */
+
+    main{
+      flex:1;
+      padding:25px;
+    }
+
+    /* CARDS */
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+      margin-bottom:25px;
+    }
+
+    .card{
+      background:white;
+      padding:25px;
+      border-radius:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .card p{
+      color:#64748b;
+      margin-bottom:10px;
+    }
+
+    .card h3{
+      font-size:35px;
+    }
+
+    /* UPLOAD */
+
+    .upload{
+      background:white;
+      padding:40px;
+      border-radius:20px;
+      border:3px dashed #cbd5e1;
+      text-align:center;
+      margin-bottom:25px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .upload h2{
+      margin-bottom:25px;
+      color:#334155;
+    }
+
+    .upload-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+    }
+
+    .upload-buttons button{
+      border:none;
+      padding:15px 25px;
+      border-radius:15px;
+      color:white;
+      cursor:pointer;
+      font-size:15px;
+      transition:0.3s;
+    }
+
+    .btn-blue{
+      background:#1e40af;
+    }
+
+    .btn-blue:hover{
+      background:#2563eb;
+    }
+
+    .btn-gray{
+      background:#475569;
+    }
+
+    .btn-gray:hover{
+      background:#64748b;
+    }
+
+    .btn-green{
+      background:#047857;
+    }
+
+    .btn-green:hover{
+      background:#059669;
+    }
+
+    .btn-orange{
+      background:#c2410c;
+    }
+
+    .btn-orange:hover{
+      background:#ea580c;
+    }
+
+    /* TABLE */
+
+    .table-container{
+      background:white;
+      padding:25px;
+      border-radius:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+      overflow:auto;
+      margin-bottom:25px;
+    }
+
+    .table-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+
+    .status{
+      background:#dcfce7;
+      color:#15803d;
+      padding:10px 15px;
+      border-radius:12px;
+      font-weight:bold;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    th{
+      background:#0f172a;
+      color:white;
+      padding:15px;
+      text-align:left;
+    }
+
+    td{
+      padding:15px;
+      border-bottom:1px solid #e2e8f0;
+    }
+
+    tr:nth-child(even){
+      background:#f8fafc;
+    }
+
+    /* HELP */
+
+    .help{
+      background:#dbeafe;
+      border:1px solid #93c5fd;
+      padding:25px;
+      border-radius:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .help h2{
+      margin-bottom:15px;
+      color:#1e3a8a;
+    }
+
+    .help ul{
+      padding-left:20px;
+    }
+
+    .help li{
+      margin-bottom:10px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#0f172a;
+      color:#94a3b8;
+      text-align:center;
+      padding:12px;
+      font-size:11px;
+      letter-spacing:1px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="header-left">
+      <h1>PAINEL INTELIGENTE DE APÓLICES</h1>
+      <p>Compliance e Gestão Operacional</p>
+    </div>
+
+    <div class="header-center">
+      <p>Data e Hora</p>
+      <h3 id="dataHora"></h3>
+    </div>
+
+    <div class="header-buttons">
+      <button>Dashboard</button>
+      <button>Histórico</button>
+      <button>Exportar</button>
+      <button>Ajuda</button>
+    </div>
+
+  </header>
+
+  <!-- CONTAINER -->
+
+  <div class="container">
+
+    <!-- MENU -->
+
+    <aside>
+
+      <h2>MENU</h2>
+
+      <button>Dashboard</button>
+      <button>Apólices</button>
+      <button>Transportadoras</button>
+      <button>Seguradoras</button>
+      <button>Alertas</button>
+      <button>Relatórios</button>
+      <button>Configurações</button>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main>
+
+      <!-- CARDS -->
+
+      <div class="cards">
+
+        <div class="card">
+          <p>Apólices Vencidas</p>
+          <h3>12</h3>
         </div>
 
-        <div className="text-center">
-          <p className="text-sm text-slate-300">Data e Hora</p>
-          <p className="font-semibold">{now}</p>
+        <div class="card">
+          <p>A Vencer</p>
+          <h3>18</h3>
         </div>
 
-        <div className="flex gap-2">
-          <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-sm">
-            Dashboard
-          </button>
-          <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-sm">
-            Histórico
-          </button>
-          <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-sm">
-            Exportar
-          </button>
-          <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-sm">
-            Ajuda
-          </button>
+        <div class="card">
+          <p>Sem PGR</p>
+          <h3>4</h3>
         </div>
-      </header>
 
-      <div className="flex flex-1">
-        {/* MENU */}
-        <aside className="w-64 bg-slate-800 text-white p-5 space-y-4 shadow-xl">
-          <div className="text-lg font-semibold mb-6">MENU</div>
+        <div class="card">
+          <p>Pendências</p>
+          <h3>7</h3>
+        </div>
 
-          {[
-            "Dashboard",
-            "Apólices",
-            "Transportadoras",
-            "Seguradoras",
-            "Alertas",
-            "Relatórios",
-            "Configurações",
-          ].map((item) => (
-            <button
-              key={item}
-              className="w-full text-left bg-slate-700 hover:bg-blue-700 transition p-3 rounded-xl"
-            >
-              {item}
-            </button>
-          ))}
-        </aside>
-
-        {/* CONTEÚDO */}
-        <main className="flex-1 p-6 space-y-6">
-          {/* CARDS */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {indicadores.map((item) => (
-              <div
-                key={item.titulo}
-                className="bg-white rounded-2xl shadow-md p-5"
-              >
-                <p className="text-slate-500 text-sm">{item.titulo}</p>
-                <h2 className="text-3xl font-bold mt-2 text-slate-800">
-                  {item.valor}
-                </h2>
-              </div>
-            ))}
-          </div>
-
-          {/* UPLOAD */}
-          <div className="bg-white rounded-2xl shadow-md p-8 border-2 border-dashed border-slate-300 text-center">
-            <h2 className="text-2xl font-bold text-slate-700 mb-4">
-              ARRASTE OU SELECIONE A APÓLICE PDF
-            </h2>
-
-            <div className="flex flex-wrap justify-center gap-3 mt-6">
-              <button className="bg-blue-800 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl shadow-md">
-                Ler Apólice
-              </button>
-
-              <button className="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-2xl shadow-md">
-                Revisar Dados
-              </button>
-
-              <button className="bg-emerald-700 hover:bg-emerald-600 text-white px-6 py-3 rounded-2xl shadow-md">
-                Exportar Excel
-              </button>
-
-              <button className="bg-orange-700 hover:bg-orange-600 text-white px-6 py-3 rounded-2xl shadow-md">
-                Enviar SharePoint
-              </button>
-            </div>
-          </div>
-
-          {/* TABELA */}
-          <div className="bg-white rounded-2xl shadow-md p-6 overflow-auto">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-slate-800">
-                Resultado da Leitura
-              </h2>
-
-              <span className="bg-green-100 text-green-700 px-4 py-2 rounded-xl text-sm font-semibold">
-                APTO
-              </span>
-            </div>
-
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-slate-900 text-white">
-                  <th className="text-left p-3 rounded-l-xl">Campo</th>
-                  <th className="text-left p-3 rounded-r-xl">Valor</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {dadosApolice.map(([campo, valor], index) => (
-                  <tr
-                    key={campo}
-                    className={index % 2 === 0 ? "bg-slate-50" : "bg-white"}
-                  >
-                    <td className="p-3 border-b font-medium text-slate-700">
-                      {campo}
-                    </td>
-                    <td className="p-3 border-b text-slate-600">
-                      {valor}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* AJUDA */}
-          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
-            <h3 className="text-xl font-bold text-blue-900 mb-3">
-              Sobre o Sistema
-            </h3>
-
-            <ul className="space-y-2 text-slate-700">
-              <li>• Leitura automática de apólices PDF;</li>
-              <li>• Extração inteligente de dados operacionais;</li>
-              <li>• Integração SharePoint;</li>
-              <li>• Exportação Excel, CSV e PDF;</li>
-              <li>• Controle de vencimento automático;</li>
-              <li>• Dashboard operacional;</li>
-              <li>• Alertas automáticos por email.</li>
-            </ul>
-          </div>
-        </main>
       </div>
 
-      {/* FOOTER */}
-      <footer className="bg-slate-900 text-center py-3 text-xs text-slate-400 tracking-wide">
-        CUSTOMIZED BY RODOLPHO TORRES — 2026
-      </footer>
-    </div>
-  );
-}
+      <!-- UPLOAD -->
+
+      <div class="upload">
+
+        <h2>ARRASTE OU SELECIONE A APÓLICE PDF</h2>
+
+        <div class="upload-buttons">
+
+          <button class="btn-blue">
+            Ler Apólice
+          </button>
+
+          <button class="btn-gray">
+            Revisar Dados
+          </button>
+
+          <button class="btn-green">
+            Exportar Excel
+          </button>
+
+          <button class="btn-orange">
+            Enviar SharePoint
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- TABLE -->
+
+      <div class="table-container">
+
+        <div class="table-header">
+
+          <h2>Resultado da Leitura</h2>
+
+          <div class="status">
+            APTO
+          </div>
+
+        </div>
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Campo</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>Número Apólice</td>
+              <td>5501000289</td>
+            </tr>
+
+            <tr>
+              <td>Seguradora</td>
+              <td>SEGUROS SURA S/A</td>
+            </tr>
+
+            <tr>
+              <td>Corretora</td>
+              <td>NOVA ASTEROIDE CORRETORA</td>
+            </tr>
+
+            <tr>
+              <td>Transportadora</td>
+              <td>AGT LOG LOGISTICA E CARGAS LTDA</td>
+            </tr>
+
+            <tr>
+              <td>CNPJ</td>
+              <td>00.853.538/0001-49</td>
+            </tr>
+
+            <tr>
+              <td>Vigência Inicial</td>
+              <td>30/04/2025</td>
+            </tr>
+
+            <tr>
+              <td>Vigência Final</td>
+              <td>30/04/2026</td>
+            </tr>
+
+            <tr>
+              <td>Status</td>
+              <td>NO PRAZO</td>
+            </tr>
+
+            <tr>
+              <td>LMG</td>
+              <td>R$ 2.000.000,00</td>
+            </tr>
+
+            <tr>
+              <td>Tipo Seguro</td>
+              <td>RC-DC</td>
+            </tr>
+
+            <tr>
+              <td>Score Compliance</td>
+              <td>92%</td>
+            </tr>
+
+            <tr>
+              <td>Status Operacional</td>
+              <td>APTO</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <!-- HELP -->
+
+      <div class="help">
+
+        <h2>Sobre o Sistema</h2>
+
+        <ul>
+          <li>Leitura automática de apólices PDF;</li>
+          <li>Extração inteligente de dados operacionais;</li>
+          <li>Integração SharePoint;</li>
+          <li>Exportação Excel, CSV e PDF;</li>
+          <li>Controle automático de vencimentos;</li>
+          <li>Dashboard operacional;</li>
+          <li>Alertas automáticos por email.</li>
+        </ul>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    CUSTOMIZED BY RODOLPHO TORRES — 2026
+  </footer>
+
+  <script>
+
+    function atualizarDataHora() {
+
+      const agora = new Date();
+
+      const formatado =
+        agora.toLocaleDateString('pt-BR') +
+        ' ' +
+        agora.toLocaleTimeString('pt-BR');
+
+      document.getElementById('dataHora').innerHTML = formatado;
+    }
+
+    atualizarDataHora();
+
+    setInterval(atualizarDataHora, 1000);
+
+  </script>
+
+</body>
+</html>
