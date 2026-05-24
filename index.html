@@ -1,6 +1,12 @@
+<!-- ========================= -->
+<!--        index.html         -->
+<!-- ========================= -->
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,6 +28,8 @@
       background:#f1f5f9;
       color:#1e293b;
     }
+
+    /* HEADER */
 
     header{
       background:#0f172a;
@@ -46,24 +54,38 @@
       text-align:center;
     }
 
+    .header-center p{
+      color:#cbd5e1;
+      font-size:14px;
+    }
+
     .header-buttons{
       display:flex;
       gap:10px;
     }
 
     .header-buttons button{
-      background:#2563eb;
+      background:#1d4ed8;
       border:none;
       color:white;
       padding:10px 15px;
       border-radius:10px;
       cursor:pointer;
+      transition:0.3s;
     }
+
+    .header-buttons button:hover{
+      background:#2563eb;
+    }
+
+    /* LAYOUT */
 
     .container{
       display:flex;
       min-height:calc(100vh - 120px);
     }
+
+    /* MENU */
 
     aside{
       width:240px;
@@ -86,12 +108,21 @@
       margin-bottom:12px;
       text-align:left;
       cursor:pointer;
+      transition:0.3s;
     }
+
+    aside button:hover{
+      background:#2563eb;
+    }
+
+    /* MAIN */
 
     main{
       flex:1;
       padding:25px;
     }
+
+    /* CARDS */
 
     .cards{
       display:grid;
@@ -107,10 +138,16 @@
       box-shadow:0 4px 12px rgba(0,0,0,0.08);
     }
 
+    .card p{
+      color:#64748b;
+      margin-bottom:10px;
+    }
+
     .card h3{
       font-size:35px;
-      margin-top:10px;
     }
+
+    /* UPLOAD */
 
     .upload{
       background:white;
@@ -123,44 +160,83 @@
     }
 
     .upload h2{
-      margin-bottom:20px;
+      margin-bottom:25px;
+      color:#334155;
     }
 
     .upload-buttons{
       display:flex;
-      justify-content:center;
       flex-wrap:wrap;
+      justify-content:center;
       gap:15px;
     }
 
     .upload-buttons button{
       border:none;
-      color:white;
       padding:15px 25px;
       border-radius:15px;
+      color:white;
       cursor:pointer;
       font-size:15px;
+      transition:0.3s;
     }
 
     .btn-blue{
-      background:#1d4ed8;
+      background:#1e40af;
+    }
+
+    .btn-blue:hover{
+      background:#2563eb;
+    }
+
+    .btn-gray{
+      background:#475569;
+    }
+
+    .btn-gray:hover{
+      background:#64748b;
     }
 
     .btn-green{
+      background:#047857;
+    }
+
+    .btn-green:hover{
       background:#059669;
     }
 
     .btn-orange{
+      background:#c2410c;
+    }
+
+    .btn-orange:hover{
       background:#ea580c;
     }
+
+    /* TABLE */
 
     .table-container{
       background:white;
       padding:25px;
       border-radius:20px;
       box-shadow:0 4px 12px rgba(0,0,0,0.08);
-      margin-bottom:25px;
       overflow:auto;
+      margin-bottom:25px;
+    }
+
+    .table-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+
+    .status{
+      background:#dbeafe;
+      color:#1d4ed8;
+      padding:10px 15px;
+      border-radius:12px;
+      font-weight:bold;
     }
 
     table{
@@ -184,26 +260,14 @@
       background:#f8fafc;
     }
 
-    .status{
-      background:#dcfce7;
-      color:#15803d;
-      padding:10px 15px;
-      border-radius:12px;
-      font-weight:bold;
-    }
-
-    .table-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:20px;
-    }
+    /* HELP */
 
     .help{
       background:#dbeafe;
       border:1px solid #93c5fd;
       padding:25px;
       border-radius:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
     }
 
     .help h2{
@@ -211,10 +275,15 @@
       color:#1e3a8a;
     }
 
+    .help ul{
+      padding-left:20px;
+    }
+
     .help li{
       margin-bottom:10px;
-      margin-left:20px;
     }
+
+    /* FOOTER */
 
     footer{
       background:#0f172a;
@@ -230,9 +299,12 @@
     }
 
   </style>
+
 </head>
 
 <body>
+
+<!-- HEADER -->
 
 <header>
 
@@ -255,7 +327,11 @@
 
 </header>
 
+<!-- CONTAINER -->
+
 <div class="container">
+
+  <!-- MENU -->
 
   <aside>
 
@@ -271,31 +347,37 @@
 
   </aside>
 
+  <!-- MAIN -->
+
   <main>
+
+    <!-- CARDS -->
 
     <div class="cards">
 
       <div class="card">
         <p>Apólices Vencidas</p>
-        <h3>12</h3>
+        <h3 id="cardVencidas">0</h3>
       </div>
 
       <div class="card">
         <p>A Vencer</p>
-        <h3>18</h3>
+        <h3 id="cardVencer">0</h3>
       </div>
 
       <div class="card">
-        <p>Sem PGR</p>
-        <h3>4</h3>
+        <p>Sem LMG</p>
+        <h3 id="cardLMG">0</h3>
       </div>
 
       <div class="card">
         <p>Pendências</p>
-        <h3>7</h3>
+        <h3 id="cardPendencias">0</h3>
       </div>
 
     </div>
+
+    <!-- UPLOAD -->
 
     <div class="upload">
 
@@ -305,12 +387,14 @@
 
       <div class="upload-buttons">
 
-        <button class="btn-blue" onclick="document.getElementById('fileInput').click()">
+        <button class="btn-blue"
+          onclick="document.getElementById('fileInput').click()">
           Ler Apólice
         </button>
 
-        <button class="btn-green">
-          Exportar Excel
+        <button class="btn-green"
+          onclick="exportarCSV()">
+          Exportar CSV
         </button>
 
         <button class="btn-orange">
@@ -321,14 +405,16 @@
 
     </div>
 
+    <!-- RESULTADO -->
+
     <div class="table-container">
 
       <div class="table-header">
 
         <h2>Resultado da Leitura</h2>
 
-        <div class="status">
-          APTO
+        <div id="statusBox" class="status">
+          AGUARDANDO PDF
         </div>
 
       </div>
@@ -344,42 +430,26 @@
 
         <tbody id="resultadoTabela">
 
-          <tr>
-            <td>Seguradora</td>
-            <td id="seguradora">-</td>
-          </tr>
-
-          <tr>
-            <td>Tipo Seguro</td>
-            <td id="tipoSeguro">-</td>
-          </tr>
-
-          <tr>
-            <td>Número SUSEP</td>
-            <td id="susep">-</td>
-          </tr>
-
-          <tr>
-            <td>LMG</td>
-            <td id="lmg">-</td>
-          </tr>
-
         </tbody>
 
       </table>
 
     </div>
 
-    <div class="help" id="ajudaBox">
+    <!-- HELP -->
+
+    <div class="help">
 
       <h2>Sobre o Sistema</h2>
 
       <ul>
-        <li>Leitura automática de apólices PDF</li>
-        <li>Extração inteligente de dados</li>
-        <li>Integração SharePoint</li>
-        <li>Exportação Excel e CSV</li>
-        <li>Controle de vencimento</li>
+        <li>Leitura automática de apólices PDF;</li>
+        <li>Reconhecimento de seguradoras;</li>
+        <li>Extração automática de dados;</li>
+        <li>Identificação de vigência;</li>
+        <li>Controle operacional;</li>
+        <li>Exportação CSV;</li>
+        <li>Preparado para SharePoint.</li>
       </ul>
 
     </div>
@@ -388,40 +458,67 @@
 
 </div>
 
+<!-- FOOTER -->
+
 <footer>
-  CUSTOMIZED BY RODOLPHO TORRES — 2026
+  customized by rodolpho torres — 2026
 </footer>
 
 <script>
 
+  // =========================
   // DATA E HORA
+  // =========================
 
   function atualizarDataHora(){
 
     const agora = new Date();
 
     document.getElementById("dataHora").innerHTML =
-      agora.toLocaleDateString('pt-BR') + ' ' +
+      agora.toLocaleDateString('pt-BR') +
+      ' ' +
       agora.toLocaleTimeString('pt-BR');
+
   }
 
   setInterval(atualizarDataHora,1000);
+
   atualizarDataHora();
 
+  // =========================
   // AJUDA
+  // =========================
 
   function mostrarAjuda(){
 
     alert(
-      "Sistema de leitura inteligente de apólices PDF."
+      "Sistema inteligente para leitura automática de apólices PDF."
     );
+
   }
 
-  // LEITOR PDF
+  // =========================
+  // SEGURADORAS
+  // =========================
 
-  const fileInput = document.getElementById('fileInput');
+  const seguradoras = [
 
-  fileInput.addEventListener('change', async function(e){
+    "CHUBB",
+    "SOMPO",
+    "PORTO SEGURO",
+    "BERKLEY",
+    "SURA",
+    "EZZE"
+
+  ];
+
+  // =========================
+  // INPUT PDF
+  // =========================
+
+  const fileInput = document.getElementById("fileInput");
+
+  fileInput.addEventListener("change", async function(e){
 
     const file = e.target.files[0];
 
@@ -437,7 +534,7 @@
 
       const pdf = await pdfjsLib.getDocument(typedarray).promise;
 
-      let textoCompleto = '';
+      let textoCompleto = "";
 
       for(let i = 1; i <= pdf.numPages; i++){
 
@@ -447,71 +544,294 @@
 
         const strings = textContent.items.map(item => item.str);
 
-        textoCompleto += strings.join(' ') + ' ';
+        textoCompleto += strings.join(" ") + " ";
+
       }
 
-      console.log(textoCompleto);
+      analisarDocumento(textoCompleto);
 
-      analisarTexto(textoCompleto);
     };
 
     reader.readAsArrayBuffer(file);
 
   });
 
-  // ANALISADOR
+  // =========================
+  // IDENTIFICAR SEGURADORA
+  // =========================
 
-  function analisarTexto(texto){
+  function identificarSeguradora(texto){
 
     texto = texto.toUpperCase();
 
-    // SEGURADORA
+    for(let seguradora of seguradoras){
 
-    if(texto.includes("SURA")){
-      document.getElementById("seguradora").innerHTML = "SEGUROS SURA";
+      if(texto.includes(seguradora)){
+        return seguradora;
+      }
+
     }
 
-    else if(texto.includes("TOKIO")){
-      document.getElementById("seguradora").innerHTML = "TOKIO MARINE";
+    return "NÃO IDENTIFICADA";
+
+  }
+
+  // =========================
+  // IDENTIFICAR TIPO
+  // =========================
+
+  function identificarTipoSeguro(texto){
+
+    texto = texto.toUpperCase();
+
+    const tipos = [
+
+      "RC-DC",
+      "RCTR-C",
+      "RC-V"
+
+    ];
+
+    for(let tipo of tipos){
+
+      if(texto.includes(tipo)){
+        return tipo;
+      }
+
     }
 
-    else if(texto.includes("SOMPO")){
-      document.getElementById("seguradora").innerHTML = "SOMPO";
+    return "";
+
+  }
+
+  // =========================
+  // REGEX
+  // =========================
+
+  function buscarSusep(texto){
+
+    const regex =
+      /\d{5}\.\d{6}\/\d{4}-\d{2}/;
+
+    const resultado = texto.match(regex);
+
+    return resultado ? resultado[0] : "";
+
+  }
+
+  function buscarCNPJ(texto){
+
+    const regex =
+      /\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/;
+
+    const resultado = texto.match(regex);
+
+    return resultado ? resultado[0] : "";
+
+  }
+
+  function buscarDatas(texto){
+
+    const regex =
+      /\d{2}\/\d{2}\/\d{4}/g;
+
+    return texto.match(regex);
+
+  }
+
+  function buscarLMG(texto){
+
+    const regex =
+      /R\$\s?[\d\.\,]+/g;
+
+    const resultado = texto.match(regex);
+
+    return resultado ? resultado[0] : "";
+
+  }
+
+  // =========================
+  // STATUS VIGÊNCIA
+  // =========================
+
+  function calcularStatus(dataFinal){
+
+    if(!dataFinal){
+
+      return "SEM VIGÊNCIA";
+
     }
 
-    else{
-      document.getElementById("seguradora").innerHTML = "NÃO IDENTIFICADA";
+    const hoje = new Date();
+
+    const partes = dataFinal.split("/");
+
+    const vencimento = new Date(
+
+      partes[2],
+      partes[1]-1,
+      partes[0]
+
+    );
+
+    if(vencimento < hoje){
+
+      return "VENCIDA";
+
     }
 
-    // TIPO SEGURO
+    return "NO PRAZO";
 
-    if(texto.includes("RC-DC")){
-      document.getElementById("tipoSeguro").innerHTML = "RC-DC";
+  }
+
+  // =========================
+  // ANALISAR DOCUMENTO
+  // =========================
+
+  let dadosExtraidos = [];
+
+  function analisarDocumento(texto){
+
+    const tabela =
+      document.getElementById("resultadoTabela");
+
+    tabela.innerHTML = "";
+
+    const seguradora =
+      identificarSeguradora(texto);
+
+    const tipoSeguro =
+      identificarTipoSeguro(texto);
+
+    const susep =
+      buscarSusep(texto);
+
+    const cnpj =
+      buscarCNPJ(texto);
+
+    const datas =
+      buscarDatas(texto);
+
+    const lmg =
+      buscarLMG(texto);
+
+    const inicioVigencia =
+      datas ? datas[0] : "";
+
+    const fimVigencia =
+      datas ? datas[1] : "";
+
+    const status =
+      calcularStatus(fimVigencia);
+
+    document.getElementById("statusBox").innerHTML =
+      status;
+
+    dadosExtraidos = [
+
+      ["Seguradora", seguradora],
+
+      ["Tipo Seguro", tipoSeguro],
+
+      ["Número SUSEP", susep],
+
+      ["CNPJ", cnpj],
+
+      ["LMG", lmg],
+
+      ["Início Vigência", inicioVigencia],
+
+      ["Fim Vigência", fimVigencia],
+
+      ["Status", status]
+
+    ];
+
+    dadosExtraidos.forEach(campo => {
+
+      tabela.innerHTML += `
+
+        <tr>
+
+          <td>${campo[0]}</td>
+
+          <td>${campo[1]}</td>
+
+        </tr>
+
+      `;
+
+    });
+
+    atualizarCards(status,lmg);
+
+  }
+
+  // =========================
+  // CARDS
+  // =========================
+
+  function atualizarCards(status,lmg){
+
+    if(status === "VENCIDA"){
+
+      document.getElementById("cardVencidas")
+        .innerHTML = 1;
+
     }
 
-    else if(texto.includes("RCTR-C")){
-      document.getElementById("tipoSeguro").innerHTML = "RCTR-C";
+    if(status === "NO PRAZO"){
+
+      document.getElementById("cardVencer")
+        .innerHTML = 1;
+
     }
 
-    // SUSEP
+    if(!lmg){
 
-    const regexSusep = /\d{5}\.\d{6}\/\d{4}-\d{2}/;
+      document.getElementById("cardLMG")
+        .innerHTML = 1;
 
-    const susepEncontrado = texto.match(regexSusep);
-
-    if(susepEncontrado){
-      document.getElementById("susep").innerHTML = susepEncontrado[0];
     }
 
-    // LMG
+  }
 
-    const regexLMG = /R\$\s?[\d\.\,]+/;
+  // =========================
+  // EXPORTAR CSV
+  // =========================
 
-    const lmgEncontrado = texto.match(regexLMG);
+  function exportarCSV(){
 
-    if(lmgEncontrado){
-      document.getElementById("lmg").innerHTML = lmgEncontrado[0];
+    if(dadosExtraidos.length === 0){
+
+      alert("Nenhum dado extraído.");
+
+      return;
+
     }
+
+    let csv = "Campo,Valor\n";
+
+    dadosExtraidos.forEach(item => {
+
+      csv += item[0] + "," + item[1] + "\n";
+
+    });
+
+    const blob =
+      new Blob([csv], { type: "text/csv" });
+
+    const url =
+      window.URL.createObjectURL(blob);
+
+    const a =
+      document.createElement("a");
+
+    a.href = url;
+
+    a.download = "apolice.csv";
+
+    a.click();
 
   }
 
