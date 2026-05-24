@@ -1,0 +1,188 @@
+export default function PainelApolicesPOC() {
+  const now = new Date().toLocaleString("pt-BR");
+
+  const indicadores = [
+    { titulo: "Apólices Vencidas", valor: 12 },
+    { titulo: "A Vencer", valor: 18 },
+    { titulo: "Sem PGR", valor: 4 },
+    { titulo: "Pendências", valor: 7 },
+  ];
+
+  const dadosApolice = [
+    ["Número Apólice", "5501000289"],
+    ["Seguradora", "SEGUROS SURA S/A"],
+    ["Corretora", "NOVA ASTEROIDE CORRETORA"],
+    ["Transportadora", "AGT LOG LOGISTICA E CARGAS LTDA"],
+    ["CNPJ", "00.853.538/0001-49"],
+    ["Vigência Inicial", "30/04/2025"],
+    ["Vigência Final", "30/04/2026"],
+    ["Status", "NO PRAZO"],
+    ["LMG", "R$ 2.000.000,00"],
+    ["Tipo Seguro", "RC-DC"],
+    ["Score Compliance", "92%"],
+    ["Status Operacional", "APTO"],
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-100 flex flex-col">
+      {/* HEADER */}
+      <header className="bg-slate-900 text-white shadow-lg px-6 py-4 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-wide">
+            PAINEL INTELIGENTE DE APÓLICES
+          </h1>
+          <p className="text-sm text-slate-300">
+            Compliance e Gestão Operacional
+          </p>
+        </div>
+
+        <div className="text-center">
+          <p className="text-sm text-slate-300">Data e Hora</p>
+          <p className="font-semibold">{now}</p>
+        </div>
+
+        <div className="flex gap-2">
+          <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-sm">
+            Dashboard
+          </button>
+          <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-sm">
+            Histórico
+          </button>
+          <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-sm">
+            Exportar
+          </button>
+          <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-sm">
+            Ajuda
+          </button>
+        </div>
+      </header>
+
+      <div className="flex flex-1">
+        {/* MENU */}
+        <aside className="w-64 bg-slate-800 text-white p-5 space-y-4 shadow-xl">
+          <div className="text-lg font-semibold mb-6">MENU</div>
+
+          {[
+            "Dashboard",
+            "Apólices",
+            "Transportadoras",
+            "Seguradoras",
+            "Alertas",
+            "Relatórios",
+            "Configurações",
+          ].map((item) => (
+            <button
+              key={item}
+              className="w-full text-left bg-slate-700 hover:bg-blue-700 transition p-3 rounded-xl"
+            >
+              {item}
+            </button>
+          ))}
+        </aside>
+
+        {/* CONTEÚDO */}
+        <main className="flex-1 p-6 space-y-6">
+          {/* CARDS */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {indicadores.map((item) => (
+              <div
+                key={item.titulo}
+                className="bg-white rounded-2xl shadow-md p-5"
+              >
+                <p className="text-slate-500 text-sm">{item.titulo}</p>
+                <h2 className="text-3xl font-bold mt-2 text-slate-800">
+                  {item.valor}
+                </h2>
+              </div>
+            ))}
+          </div>
+
+          {/* UPLOAD */}
+          <div className="bg-white rounded-2xl shadow-md p-8 border-2 border-dashed border-slate-300 text-center">
+            <h2 className="text-2xl font-bold text-slate-700 mb-4">
+              ARRASTE OU SELECIONE A APÓLICE PDF
+            </h2>
+
+            <div className="flex flex-wrap justify-center gap-3 mt-6">
+              <button className="bg-blue-800 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl shadow-md">
+                Ler Apólice
+              </button>
+
+              <button className="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-2xl shadow-md">
+                Revisar Dados
+              </button>
+
+              <button className="bg-emerald-700 hover:bg-emerald-600 text-white px-6 py-3 rounded-2xl shadow-md">
+                Exportar Excel
+              </button>
+
+              <button className="bg-orange-700 hover:bg-orange-600 text-white px-6 py-3 rounded-2xl shadow-md">
+                Enviar SharePoint
+              </button>
+            </div>
+          </div>
+
+          {/* TABELA */}
+          <div className="bg-white rounded-2xl shadow-md p-6 overflow-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold text-slate-800">
+                Resultado da Leitura
+              </h2>
+
+              <span className="bg-green-100 text-green-700 px-4 py-2 rounded-xl text-sm font-semibold">
+                APTO
+              </span>
+            </div>
+
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-slate-900 text-white">
+                  <th className="text-left p-3 rounded-l-xl">Campo</th>
+                  <th className="text-left p-3 rounded-r-xl">Valor</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {dadosApolice.map(([campo, valor], index) => (
+                  <tr
+                    key={campo}
+                    className={index % 2 === 0 ? "bg-slate-50" : "bg-white"}
+                  >
+                    <td className="p-3 border-b font-medium text-slate-700">
+                      {campo}
+                    </td>
+                    <td className="p-3 border-b text-slate-600">
+                      {valor}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* AJUDA */}
+          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+            <h3 className="text-xl font-bold text-blue-900 mb-3">
+              Sobre o Sistema
+            </h3>
+
+            <ul className="space-y-2 text-slate-700">
+              <li>• Leitura automática de apólices PDF;</li>
+              <li>• Extração inteligente de dados operacionais;</li>
+              <li>• Integração SharePoint;</li>
+              <li>• Exportação Excel, CSV e PDF;</li>
+              <li>• Controle de vencimento automático;</li>
+              <li>• Dashboard operacional;</li>
+              <li>• Alertas automáticos por email.</li>
+            </ul>
+          </div>
+        </main>
+      </div>
+
+      {/* FOOTER */}
+      <footer className="bg-slate-900 text-center py-3 text-xs text-slate-400 tracking-wide">
+        CUSTOMIZED BY RODOLPHO TORRES — 2026
+      </footer>
+    </div>
+  );
+}
